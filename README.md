@@ -2,7 +2,7 @@
 Projeto que atende as funcionalidades de um sistema de cartão de crédito.
 
 ## Funcionalidades implementadas
-- Setup do projeto
+- Nova proposta
 
 ## Tecnologia utilizada
 
