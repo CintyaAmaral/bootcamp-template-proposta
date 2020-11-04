@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class Proposta {
@@ -32,9 +33,12 @@ public class Proposta {
     @NotBlank
     private String endereco;
 
-    @NotBlank
     @Positive
     private BigDecimal salario;
+
+    @Deprecated
+    public Proposta() {
+    }
 
     public Proposta(@NotBlank @CpfCnpj String documento, @NotBlank @Email String email,
                     @NotBlank String nome, @NotBlank String endereco,
@@ -68,5 +72,18 @@ public class Proposta {
 
     public BigDecimal getSalario() {
         return salario;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Proposta proposta = (Proposta) o;
+        return Objects.equals(documento, proposta.documento);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(documento);
     }
 }

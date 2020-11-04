@@ -22,11 +22,11 @@ public class NovaPropostaRequest {
     @NotBlank
     private String endereco;
 
-    @NotNull
+
     @Positive
     private BigDecimal salario;
 
-    public NovaPropostaRequest(@NotBlank String documento, @NotBlank @Email String email,
+    public NovaPropostaRequest(@NotBlank @CpfCnpj String documento, @NotBlank @Email String email,
                                @NotBlank String nome, @NotBlank String endereco,
                                @NotNull @Positive BigDecimal salario) {
         this.documento = documento;
@@ -41,13 +41,9 @@ public class NovaPropostaRequest {
         return documento;
     }
 
-    public String getDocumentoApenasDigitos() {
-        return documento.replaceAll("[^0-9]","");
-    }
 
     public Proposta toModel(){
-        String documentoProposta = this.getDocumentoApenasDigitos();
-        return new Proposta(documentoProposta, email, nome, endereco, salario);
+        return new Proposta(documento, email, nome, endereco, salario);
 
     }
 
