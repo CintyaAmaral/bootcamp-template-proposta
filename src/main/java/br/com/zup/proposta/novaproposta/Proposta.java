@@ -1,5 +1,6 @@
 package br.com.zup.proposta.novaproposta;
 
+import br.com.zup.proposta.validation.CpfCnpj;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;

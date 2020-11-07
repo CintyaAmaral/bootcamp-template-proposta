@@ -1,4 +1,4 @@
-package br.com.zup.proposta.novaproposta;
+package br.com.zup.proposta.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

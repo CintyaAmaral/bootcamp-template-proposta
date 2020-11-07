@@ -1,5 +1,7 @@
 package br.com.zup.proposta.novaproposta;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +13,13 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
 
+
 @RestController
 public class PropostaController {
 
     private final PropostaRepository repository;
+
+    private Logger logger = LoggerFactory.getLogger(PropostaController.class);
 
     public PropostaController(PropostaRepository repository) {
         this.repository = repository;
@@ -26,11 +31,14 @@ public class PropostaController {
 
         //erro de negócio
         if (repository.findByDocumento(novaPropostaRequest.getDocumento()).isPresent()){
+            logger.warn("[CRIAÇÃO DA PROPOSTA] Mais de uma tentativa de criação da proposta com o mesmo documento: {}", novaPropostaRequest.getDocumento());
+
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
 
         Proposta novaProposta = novaPropostaRequest.toModel();
         repository.save(novaProposta);
+        logger.info("[CRIAÇÃO DA PROPOSTA] Proposta criada com sucesso: {}", novaProposta.getId());
 
         URI enderecoConsulta = builder.path("/propostas/{id}").build(novaProposta.getId());
         return ResponseEntity.created(enderecoConsulta).build();

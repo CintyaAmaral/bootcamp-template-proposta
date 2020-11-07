@@ -1,5 +1,6 @@
-package br.com.zup.proposta.novaproposta;
+package br.com.zup.proposta.validation;
 
+import br.com.zup.proposta.validation.CpfCnpj;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 
