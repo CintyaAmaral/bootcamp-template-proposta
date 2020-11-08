@@ -1,5 +1,6 @@
 package br.com.zup.proposta.novaproposta;
 
+import br.com.zup.proposta.analisefinanceira.AnaliseFinanceiraRequest;
 import br.com.zup.proposta.validation.CpfCnpj;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -86,5 +87,13 @@ public class Proposta {
     @Override
     public int hashCode() {
         return Objects.hash(documento);
+    }
+
+    public AnaliseFinanceiraRequest toAnaliseFinanceiraRequest(){
+        return new AnaliseFinanceiraRequest(this.documento, this.nome, this.id);
+    }
+
+    public void modificaStatusProposta(StatusProposta statusProposta){
+        
     }
 }
