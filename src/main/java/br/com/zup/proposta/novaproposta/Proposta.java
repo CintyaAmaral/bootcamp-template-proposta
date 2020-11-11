@@ -1,12 +1,12 @@
 package br.com.zup.proposta.novaproposta;
 
 import br.com.zup.proposta.analisefinanceira.AnaliseFinanceiraRequest;
+import br.com.zup.proposta.cartao.Cartao;
 import br.com.zup.proposta.validation.CpfCnpj;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.Assert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name = "findPropostaByStatus", query = "select p from Proposta p where p.statusProposta = :statusProposta")
 public class Proposta {
 
     @Id
@@ -38,6 +39,12 @@ public class Proposta {
     @Positive
     private BigDecimal salario;
 
+    @Enumerated(EnumType.STRING)
+    private StatusProposta statusProposta;
+
+    @OneToOne
+    private Cartao cartao;
+
     @Deprecated
     public Proposta() {
     }
@@ -50,6 +57,7 @@ public class Proposta {
         this.nome = nome;
         this.endereco = endereco;
         this.salario = salario;
+        this.statusProposta = StatusProposta.PENDENTE;
     }
 
     public String getId() {
@@ -76,6 +84,10 @@ public class Proposta {
         return salario;
     }
 
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -94,6 +106,16 @@ public class Proposta {
     }
 
     public void modificaStatusProposta(StatusProposta statusProposta){
-        
+        Assert.notNull(statusProposta, "O status da proposta não pode ser nulo");
+        this.statusProposta = statusProposta;
     }
+
+    public void incluirCartaoNaProposta(Cartao cartao){
+        this.cartao = cartao;
+    }
+
+    public boolean verificarSeNaoExisteCartao(){
+        return Objects.isNull(cartao);
+    }
+
 }
