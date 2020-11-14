@@ -43,12 +43,12 @@ public class CadastroCartaoService {
             }
         }
     }
-    
 
     private CartaoResponse pesquisaCartao(String id){
         return cartaoClient.pesquisarCartaoPorIdProposta(id);
     }
 
+    @Transactional
     private void cadastraCartaoEAssociaAProposta(Proposta proposta, Cartao cartao){
         cartao.incluirPropostaNoCartao(proposta);
         entityManager.persist(cartao);

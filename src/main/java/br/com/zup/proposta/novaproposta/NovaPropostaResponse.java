@@ -10,12 +10,15 @@ public class NovaPropostaResponse {
     private String endereco;
     private BigDecimal salario;
 
+    private StatusProposta statusProposta;
+
     public NovaPropostaResponse(Proposta proposta) {
-        this.documento = documento;
-        this.email = email;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.salario = salario;
+        this.documento = proposta.getDocumento();
+        this.email = proposta.getEmail();
+        this.nome = proposta.getNome();
+        this.endereco = proposta.getEndereco();
+        this.salario = proposta.getSalario();
+        this.statusProposta = proposta.getStatusProposta();
     }
 
     public String getDocumento() {
@@ -56,5 +59,13 @@ public class NovaPropostaResponse {
 
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
+    }
+
+    public StatusProposta getStatusProposta() {
+        return statusProposta;
+    }
+
+    public void setStatusProposta(StatusProposta statusProposta) {
+        this.statusProposta = statusProposta;
     }
 }

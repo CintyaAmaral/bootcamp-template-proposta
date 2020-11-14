@@ -1,5 +1,6 @@
 package br.com.zup.proposta.novaproposta;
 
+import br.com.zup.proposta.analisefinanceira.AnaliseFinanceiraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ import java.net.URI;
 public class PropostaController {
 
     private final PropostaRepository repository;
+
+    private AnaliseFinanceiraService analiseFinanceiraService;
 
     private Logger logger = LoggerFactory.getLogger(PropostaController.class);
 
@@ -39,6 +42,10 @@ public class PropostaController {
         Proposta novaProposta = novaPropostaRequest.toModel();
         repository.save(novaProposta);
         logger.info("[CRIAÇÃO DA PROPOSTA] Proposta criada com sucesso: {}", novaProposta.getId());
+
+        analiseFinanceiraService.executarAnaliseFinanceiraProposta(novaProposta);
+        repository.save(novaProposta);
+        logger.info("[ANÁLISE FINANCEIRA] Análise dinanceira da proposta realizada: {}", novaProposta.getId());
 
         URI enderecoConsulta = builder.path("/propostas/{id}").build(novaProposta.getId());
         return ResponseEntity.created(enderecoConsulta).build();

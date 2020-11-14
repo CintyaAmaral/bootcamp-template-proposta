@@ -26,6 +26,7 @@ public class NovaPropostaRequest {
 
 
     @Positive
+    @NotNull
     private BigDecimal salario;
 
     public NovaPropostaRequest(@NotBlank @CpfCnpj String documento, @NotBlank @Email String email,

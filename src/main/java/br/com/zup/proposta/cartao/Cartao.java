@@ -20,7 +20,7 @@ public class Cartao {
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @NotBlank
+    @NotNull
     private String numeroCartao;
 
     @NotNull
