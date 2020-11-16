@@ -1,16 +1,15 @@
 package br.com.zup.proposta.cartao;
 
+import br.com.zup.proposta.biometria.Biometria;
 import br.com.zup.proposta.novaproposta.Proposta;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.util.Assert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Cartao {
@@ -28,6 +27,13 @@ public class Cartao {
 
     @OneToOne
     private Proposta proposta;
+
+    @OneToMany
+    private Set<Biometria> biometrias;
+
+    @Deprecated
+    public Cartao() {
+    }
 
     public Cartao(@NotBlank String numeroCartao, @NotNull LocalDateTime emitidoEm) {
         this.numeroCartao = numeroCartao;
@@ -49,6 +55,11 @@ public class Cartao {
     public void incluirPropostaNoCartao(Proposta proposta){
         Assert.notNull(proposta, "A proposta não pode ser nula para associar ao cartão");
         this.proposta = proposta;
+    }
+
+    public void incluirBiometriaNoCartao(Biometria biometria){
+        Assert.notNull(biometria, "A biometria não pode ser nula");
+        biometrias.add(biometria);
     }
 }
 
