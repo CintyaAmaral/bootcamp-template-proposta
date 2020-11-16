@@ -90,18 +90,6 @@ public class Proposta {
         return statusProposta;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Proposta proposta = (Proposta) o;
-        return Objects.equals(documento, proposta.documento);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(documento);
-    }
 
     public AnaliseFinanceiraRequest toAnaliseFinanceiraRequest(){
         return new AnaliseFinanceiraRequest(this.documento, this.nome, this.id);

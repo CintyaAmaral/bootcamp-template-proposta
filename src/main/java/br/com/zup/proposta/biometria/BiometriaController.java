@@ -22,7 +22,7 @@ public class BiometriaController {
     private EntityManager entityManager;
     private Logger logger = LoggerFactory.getLogger(Biometria.class);
 
-    @PostMapping("idCartao/biometria")
+    @PostMapping("/{idCartao}/biometria")
     @Transactional
     public ResponseEntity cadastraBiometria(@PathVariable String idCartao, @RequestBody @Valid BiometriaRequest biometriaRequest, UriComponentsBuilder uriComponentsBuilder){
 
