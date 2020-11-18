@@ -21,7 +21,7 @@ public class Biometria {
     private byte[] impressaoDigital;
 
     @NotNull
-    private LocalDateTime criadaEm;
+    private LocalDateTime criadaEm = LocalDateTime.now();
 
     @Deprecated
     public Biometria() {
@@ -34,4 +34,6 @@ public class Biometria {
     public String getId() {
         return id;
     }
+
+
 }

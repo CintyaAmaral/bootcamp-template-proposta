@@ -1,10 +1,10 @@
 package br.com.zup.proposta.biometria;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class BiometriaRequest {
 
-    @NotBlank
+    @NotNull
     private String impressaoDigital;
 
     public String getImpressaoDigital() {

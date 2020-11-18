@@ -22,9 +22,14 @@ public class BiometriaController {
     private EntityManager entityManager;
     private Logger logger = LoggerFactory.getLogger(Biometria.class);
 
+    public BiometriaController(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @PostMapping("/{idCartao}/biometria")
     @Transactional
-    public ResponseEntity cadastraBiometria(@PathVariable String idCartao, @RequestBody @Valid BiometriaRequest biometriaRequest, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity cadastraBiometria(@PathVariable String idCartao,
+                                            @RequestBody @Valid BiometriaRequest biometriaRequest, UriComponentsBuilder uriComponentsBuilder){
 
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
         if (buscaCartao.isEmpty()){
@@ -32,15 +37,17 @@ public class BiometriaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroPadrao(Arrays.asList("Cartão não encontrado")));
         }
 
+        Cartao cartao = buscaCartao.get();
+
         Biometria biometria = biometriaRequest.toBiometria();
         entityManager.persist(biometria);
         logger.warn("[CADASTRO DE BIOMETRIA] Biometria cadastrada: {}", biometria.getId());
 
-        Cartao cartao = buscaCartao.get();
+
         cartao.incluirBiometriaNoCartao(biometria);
         entityManager.merge(cartao);
         logger.warn("[CADASTRO DE BIOMETRIA] Biometria assosciada ao cartão: {}", cartao.getNumeroCartao());
 
-        return ResponseEntity.created(uriComponentsBuilder.path("/biometrias/{idCartao}").buildAndExpand(idCartao).toUri()).build();
+        return ResponseEntity.created(uriComponentsBuilder.path("/biometrias/{id}").buildAndExpand(idCartao).toUri()).build();
     }
 }
