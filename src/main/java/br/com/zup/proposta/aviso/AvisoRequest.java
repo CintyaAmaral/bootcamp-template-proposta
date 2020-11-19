@@ -1,12 +1,16 @@
 package br.com.zup.proposta.aviso;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class AvisoRequest {
 
+    @NotBlank
     private String destino;
 
+    @NotNull
     private LocalDateTime validoAte;
 
     public Aviso toAviso(HttpServletRequest request){

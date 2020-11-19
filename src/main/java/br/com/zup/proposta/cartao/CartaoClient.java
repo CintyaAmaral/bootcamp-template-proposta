@@ -18,4 +18,8 @@ public interface CartaoClient {
 
     @PostMapping("/api/cartoes/{idCartao}/avisos")
     ResponseEntity enviarAvisoDeViagem(@PathVariable String idCartao, @RequestBody AvisoRequest avisoRequest);
+
+    @PostMapping("/api/cartoes/{idCartao}/carteiras")
+    ResponseEntity associarCarteira(@RequestBody Map carteiraRequest, @PathVariable String idCartao);
+
 }

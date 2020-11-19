@@ -4,6 +4,8 @@ import br.com.zup.proposta.aviso.Aviso;
 import br.com.zup.proposta.biometria.Biometria;
 import br.com.zup.proposta.bloqueiocartao.BloqueioCartao;
 import br.com.zup.proposta.bloqueiocartao.StatusCartao;
+import br.com.zup.proposta.carteira.Carteira;
+import br.com.zup.proposta.carteira.TipoCarteira;
 import br.com.zup.proposta.novaproposta.Proposta;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.util.Assert;
@@ -42,6 +44,9 @@ public class Cartao {
 
     @OneToMany
     private Set<Aviso> avisos;
+
+    @OneToMany
+    private Set<Carteira> carteiras;
 
     @Deprecated
     public Cartao() {
@@ -92,6 +97,16 @@ public class Cartao {
     public void incluirAvisoDeViagem(Aviso aviso){
         Assert.notNull(proposta, "A proposta não pode ser nula para assosciar ao cartão");
         avisos.add(aviso);
+    }
+
+    public boolean verificaSeJaExisteCarteiraAssiciadaComCartao(TipoCarteira tipoCarteira){
+        Assert.notNull(tipoCarteira, "A carteira não pode ser nula ");
+        return carteiras.stream().anyMatch(carteira -> carteira.verificaSeExisteTipoCarteira(tipoCarteira));
+    }
+
+    public void incluirCarteira(Carteira carteira){
+        Assert.notNull(carteira, "A carteira não pode ser nula para associação com cartão");
+        carteiras.add(carteira);
     }
 }
 
