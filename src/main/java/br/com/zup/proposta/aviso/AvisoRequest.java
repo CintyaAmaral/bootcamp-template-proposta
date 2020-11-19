@@ -7,10 +7,10 @@ public class AvisoRequest {
 
     private String destino;
 
-    private LocalDateTime dataTermino;
+    private LocalDateTime validoAte;
 
     public Aviso toAviso(HttpServletRequest request){
-        return new Aviso(destino, dataTermino, request.getRemoteAddr(), request.getHeader("User-Agent"));
+        return new Aviso(destino, validoAte, request.getRemoteAddr(), request.getHeader("User-Agent"));
     }
 
     public String getDestino() {
@@ -21,11 +21,11 @@ public class AvisoRequest {
         this.destino = destino;
     }
 
-    public LocalDateTime getDataTermino() {
-        return dataTermino;
+    public LocalDateTime getValidoAte() {
+        return validoAte;
     }
 
-    public void setDataTermino(LocalDateTime dataTermino) {
-        this.dataTermino = dataTermino;
+    public void setValidoAte(LocalDateTime validoAte) {
+        this.validoAte = validoAte;
     }
 }

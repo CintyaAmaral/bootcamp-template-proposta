@@ -23,7 +23,7 @@ public class Aviso {
     private String destino;
 
     @NotNull
-    private LocalDateTime dataTermino;
+    private LocalDateTime validoAte;
 
     private LocalDateTime instanteDoAviso = LocalDateTime.now();
 
@@ -38,9 +38,9 @@ public class Aviso {
     public Aviso() {
     }
 
-    public Aviso(@NotBlank String destino, @NotNull LocalDateTime dataTermino, String ipCliente, String userAgent) {
+    public Aviso(@NotBlank String destino, @NotNull LocalDateTime validoAte, String ipCliente, String userAgent) {
         this.destino = destino;
-        this.dataTermino = dataTermino;
+        this.validoAte = validoAte;
         this.ipCliente = ipCliente;
         this.userAgent = userAgent;
     }
