@@ -7,6 +7,7 @@ Projeto que atende as funcionalidades de um sistema de cartão de crédito.
 - Cadastro de cartão
 - Cadastro de biometria
 - Sistema de autenticação e autorização
+- Associação do cartão com carteira digital
 
 ## Tecnologia utilizada
 
