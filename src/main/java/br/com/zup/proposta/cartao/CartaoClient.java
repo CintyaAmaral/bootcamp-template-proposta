@@ -1,5 +1,6 @@
 package br.com.zup.proposta.cartao;
 
+import br.com.zup.proposta.aviso.AvisoRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,4 +16,6 @@ public interface CartaoClient {
     @PostMapping("/api/cartoes/{idCartao}/bloqueios")
     ResponseEntity bloquearCartao(@PathVariable String idCartao, @RequestBody Map bloqueioRequest);
 
+    @PostMapping("/api/cartoes/{idCartao}/avisos")
+    ResponseEntity enviarAvisoDeViagem(@PathVariable String idCartao, @RequestBody AvisoRequest avisoRequest);
 }

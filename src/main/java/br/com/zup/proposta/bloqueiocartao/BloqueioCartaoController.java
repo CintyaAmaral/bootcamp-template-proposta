@@ -25,6 +25,10 @@ public class BloqueioCartaoController {
     private EntityManager entityManager;
     private Logger logger = LoggerFactory.getLogger(BloqueioCartao.class);
 
+    public BloqueioCartaoController(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     @PostMapping("/{idCartao}/bloqueio")
     @Transactional
     public ResponseEntity bloqueiaCartao(@PathVariable String idCartao,

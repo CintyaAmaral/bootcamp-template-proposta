@@ -1,5 +1,6 @@
 package br.com.zup.proposta.cartao;
 
+import br.com.zup.proposta.aviso.Aviso;
 import br.com.zup.proposta.biometria.Biometria;
 import br.com.zup.proposta.bloqueiocartao.BloqueioCartao;
 import br.com.zup.proposta.bloqueiocartao.StatusCartao;
@@ -38,6 +39,9 @@ public class Cartao {
 
     @Enumerated(EnumType.STRING)
     private StatusCartao statusCartao;
+
+    @OneToMany
+    private Set<Aviso> avisos;
 
     @Deprecated
     public Cartao() {
@@ -83,6 +87,11 @@ public class Cartao {
 
     public boolean verificaSeCartaoEstaBoqueado(){
         return statusCartao.equals(StatusCartao.BLOQUEADO);
+    }
+
+    public void incluirAvisoDeViagem(Aviso aviso){
+        Assert.notNull(proposta, "A proposta não pode ser nula para assosciar ao cartão");
+        avisos.add(aviso);
     }
 }
 
