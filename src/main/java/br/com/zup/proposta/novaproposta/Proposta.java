@@ -22,7 +22,7 @@ public class Proposta {
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
+    //1
     @CpfCnpj
     @NotBlank
     private String documento;
@@ -40,17 +40,17 @@ public class Proposta {
     @Positive
     @NotNull
     private BigDecimal salario;
-
+    //2
     @Enumerated(EnumType.STRING)
     private StatusProposta statusProposta;
-
+    //3
     @OneToOne
     private Cartao cartao;
 
     @Deprecated
     public Proposta() {
     }
-
+    //4
     public Proposta(@NotBlank DocumentoEncrypt documentoEncrypt, @NotBlank @Email String email,
                     @NotBlank String nome, @NotBlank String endereco,
                     @NotNull @Positive BigDecimal salario) {
@@ -90,7 +90,7 @@ public class Proposta {
         return statusProposta;
     }
 
-
+    //5
     public AnaliseFinanceiraRequest toAnaliseFinanceiraRequest(){
         return new AnaliseFinanceiraRequest(this.documento, this.nome, this.id);
     }

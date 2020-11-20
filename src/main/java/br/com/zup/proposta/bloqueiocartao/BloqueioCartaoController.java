@@ -34,8 +34,10 @@ public class BloqueioCartaoController {
     public ResponseEntity bloqueiaCartao(@PathVariable String idCartao,
                                          HttpServletRequest httpServletRequest,
                                          UriComponentsBuilder uri) {
+        //1
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
-
+        //2
+        //3
         if (buscaCartao.isEmpty()) {
             logger.info("[BLOQUEIO CARTÃO] Cartão não encontrado, id: {}", idCartao);
 
@@ -43,7 +45,7 @@ public class BloqueioCartaoController {
         }
 
         Cartao cartao = buscaCartao.get();
-
+        //4
         BloqueioCartao bloqueioCartao = new BloqueioCartao(httpServletRequest.getRemoteAddr(),
                 httpServletRequest.getHeader("User-Agent"));
         entityManager.persist(bloqueioCartao);

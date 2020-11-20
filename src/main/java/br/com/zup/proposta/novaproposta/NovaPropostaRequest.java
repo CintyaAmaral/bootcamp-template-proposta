@@ -9,7 +9,7 @@ import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
 public class NovaPropostaRequest {
-
+    //1
     @NotBlank
     @CpfCnpj
     private String documento;
@@ -79,7 +79,7 @@ public class NovaPropostaRequest {
     public void setSalario(BigDecimal salario) {
         this.salario = salario;
     }
-
+    //2
     public Proposta toModel(){
         return new Proposta(new DocumentoEncrypt(documento), email, nome, endereco, salario);
 

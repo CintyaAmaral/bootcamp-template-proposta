@@ -1,6 +1,5 @@
 package br.com.zup.proposta.novaproposta;
 
-import br.com.zup.proposta.analisefinanceira.AnaliseFinanceiraResponse;
 import br.com.zup.proposta.analisefinanceira.AnaliseFinanceiraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,9 +18,9 @@ import java.net.URI;
 
 @RestController
 public class PropostaController {
-
+    //1
     private final PropostaRepository repository;
-
+    //2
     @Autowired
     private AnaliseFinanceiraService analiseFinanceiraService;
 
@@ -34,17 +33,17 @@ public class PropostaController {
     @PostMapping("/propostas")
     @Transactional
     public ResponseEntity<?> criaProposta(@Valid @RequestBody NovaPropostaRequest novaPropostaRequest, UriComponentsBuilder builder){
-
-
+        //3
         if (repository.findByDocumento(novaPropostaRequest.getDocumento()).isPresent()){
             logger.warn("[CRIAÇÃO DA PROPOSTA] Mais de uma tentativa de criação da proposta com o mesmo documento: {}", novaPropostaRequest.getDocumento());
-
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
-
+        //4
+        //5
         Proposta novaProposta = novaPropostaRequest.toModel();
         repository.save(novaProposta);
         logger.info("[CRIAÇÃO DA PROPOSTA] Proposta criada com sucesso: {}", novaProposta.getId());
+
 
         novaProposta = analiseFinanceiraService.executarAnaliseFinanceiraProposta(novaProposta);
         repository.save(novaProposta);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AnaliseFinanceiraClient {
 
     Logger logger = LoggerFactory.getLogger(AnaliseFinanceiraClient.class);
-
+    //1
     @PostMapping("/api/solicitacao")
     AnaliseFinanceiraResponse executaAnaliseFinanceira(@RequestBody AnaliseFinanceiraRequest request);
 
@@ -23,6 +23,8 @@ public interface AnaliseFinanceiraClient {
         @Override
         public AnaliseFinanceiraClient create(Throwable throwable){
             logger.error("[ANÁLISE FINANCEIRA] Retorno de erro do sistema de cartões: {}", throwable.getMessage());
+           //2
+            //3
             return (request) -> {
                 AnaliseFinanceiraResponse analiseFinanceiraResponse = new AnaliseFinanceiraResponse();
                 analiseFinanceiraResponse.setResultadoSolicitacao(ResultadoStatusProposta.COM_RESTRICAO);

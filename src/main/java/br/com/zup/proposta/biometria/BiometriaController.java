@@ -30,7 +30,9 @@ public class BiometriaController {
     @Transactional
     public ResponseEntity cadastraBiometria(@PathVariable String idCartao,
                                             @RequestBody @Valid BiometriaRequest biometriaRequest, UriComponentsBuilder uriComponentsBuilder){
-
+        //1
+        //2
+        //3
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
         if (buscaCartao.isEmpty()){
             logger.warn("[CADASTRO DE BIOMETRIA] O número do cartão não foi encontrado, id: {}", idCartao);
@@ -38,7 +40,7 @@ public class BiometriaController {
         }
 
         Cartao cartao = buscaCartao.get();
-
+        //4
         Biometria biometria = biometriaRequest.toBiometria();
         entityManager.persist(biometria);
         logger.warn("[CADASTRO DE BIOMETRIA] Biometria cadastrada: {}", biometria.getId());

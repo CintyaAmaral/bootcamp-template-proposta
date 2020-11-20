@@ -29,22 +29,22 @@ public class Cartao {
 
     @NotNull
     private LocalDateTime emitidoEm;
-
+    //1
     @OneToOne
     private Proposta proposta;
-
+    //2
     @OneToMany
     private Set<Biometria> biometrias;
-
+    //3
     @OneToMany
     private Set<BloqueioCartao> bloqueiosCataos;
-
+    //4
     @Enumerated(EnumType.STRING)
     private StatusCartao statusCartao;
-
+    //5
     @OneToMany
     private Set<Aviso> avisos;
-
+    //6
     @OneToMany
     private Set<Carteira> carteiras;
 
@@ -98,7 +98,7 @@ public class Cartao {
         Assert.notNull(proposta, "A proposta não pode ser nula para assosciar ao cartão");
         avisos.add(aviso);
     }
-
+    //7
     public boolean verificaSeJaExisteCarteiraAssiciadaComCartao(TipoCarteira tipoCarteira){
         Assert.notNull(tipoCarteira, "A carteira não pode ser nula ");
         return carteiras.stream().anyMatch(carteira -> carteira.verificaSeExisteTipoCarteira(tipoCarteira));

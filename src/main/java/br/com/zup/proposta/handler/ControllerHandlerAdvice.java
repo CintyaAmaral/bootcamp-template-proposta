@@ -27,6 +27,7 @@ public class ControllerHandlerAdvice {
                 .stream()
                 .map(error -> messageSource.getMessage(error, Locale.getDefault()))
                 .collect(Collectors.toList());
+        //1
         ErroPadrao erroPadrao = new ErroPadrao(errors);
         logger.warn("[TRATATAMENTO DE ERRO] Tratando erro(s) de MethodArgumentValidationException: {}", erroPadrao);
 

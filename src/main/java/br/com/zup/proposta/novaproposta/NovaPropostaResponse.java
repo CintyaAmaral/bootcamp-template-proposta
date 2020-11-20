@@ -9,9 +9,9 @@ public class NovaPropostaResponse {
     private String nome;
     private String endereco;
     private BigDecimal salario;
-
+    //1
     private StatusProposta statusProposta;
-
+    //2
     public NovaPropostaResponse(Proposta proposta) {
         this.documento = proposta.getDocumento();
         this.email = proposta.getEmail();

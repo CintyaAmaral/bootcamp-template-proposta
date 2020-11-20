@@ -18,7 +18,7 @@ public class Carteira {
     @Email
     @NotBlank
     private String email;
-
+    //1
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoCarteira tipoCarteira;

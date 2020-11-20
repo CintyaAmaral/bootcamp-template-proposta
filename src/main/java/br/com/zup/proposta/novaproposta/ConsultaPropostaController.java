@@ -25,13 +25,15 @@ public class ConsultaPropostaController {
 
     @GetMapping("/propostas/{id}")
     public ResponseEntity consultaPropostaId(@PathVariable String id){
+        //1
         Optional<Proposta> proposta = propostaRepository.findById(id);
-
+        //2
+        //3
         if(proposta.isEmpty()){
             logger.warn("[CONSULTA DE PROPOSTA] Proposta não encontrada, id consultado: {}", id);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroPadrao(Arrays.asList("Não existe proposta cadastrada")));
         }
-
+        //4
         NovaPropostaResponse response = new NovaPropostaResponse(proposta.get());
         logger.warn("[CONSULTA DE PROPOSTA] Proposta encontrada, id consultado: {}", id);
         return ResponseEntity.ok(response);

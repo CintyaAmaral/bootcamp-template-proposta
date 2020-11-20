@@ -28,16 +28,17 @@ public class RecuperaSenhaController {
     public ResponseEntity solicitarRecuperacaoDeSenha(@PathVariable String idCartao,
                                                       HttpServletRequest request,
                                                       UriComponentsBuilder uri){
-
+        //1
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
-
+        //2
+        //3
         if (buscaCartao.isEmpty()){
             logger.warn("[RECUPERAÇÃO DE SENHA] O número do cartão não foi encontrado, id: {}", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroPadrao(Arrays.asList("Cartão não encontrado")));
         }
 
         Cartao cartao = buscaCartao.get();
-
+        //4
         RecuperaSenha recuperaSenha = new RecuperaSenha(request.getRemoteAddr(), request.getHeader("User-Agent"), cartao);
         entityManager.persist(recuperaSenha);
         logger.warn("[RECUPERAÇÃO DE SENHA] Solicitação de recuperação de senha cadastrada, id: {}", recuperaSenha.getId());

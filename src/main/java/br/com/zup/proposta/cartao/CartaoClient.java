@@ -15,7 +15,7 @@ public interface CartaoClient {
 
     @PostMapping("/api/cartoes/{idCartao}/bloqueios")
     ResponseEntity bloquearCartao(@PathVariable String idCartao, @RequestBody Map bloqueioRequest);
-
+    //1
     @PostMapping("/api/cartoes/{idCartao}/avisos")
     ResponseEntity enviarAvisoDeViagem(@PathVariable String idCartao, @RequestBody AvisoRequest avisoRequest);
 

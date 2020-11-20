@@ -23,6 +23,7 @@ public class AvisoController {
 
     private EntityManager entityManager;
     private Logger logger = LoggerFactory.getLogger(Aviso.class);
+    //1
     private CartaoClient cartaoClient;
 
     public AvisoController(EntityManager entityManager, CartaoClient cartaoClient) {
@@ -36,8 +37,10 @@ public class AvisoController {
                                         @RequestBody @Valid AvisoRequest avisoRequest,
                                         HttpServletRequest request,
                                         UriComponentsBuilder uri){
+        //2
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
-
+        //3
+        //4
         if (buscaCartao.isEmpty()){
             logger.warn("[CADASTRO DE AVISO] O numero do cartão não foi encontrado, id: {}", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroPadrao(Arrays.asList("Cartão não econtrado")));
@@ -47,7 +50,7 @@ public class AvisoController {
 
         logger.info("[CADASTRO DE AVISO] Aviso de viagem enviado para sistema de cartões");
         cartaoClient.enviarAvisoDeViagem(cartao.getNumeroCartao(), avisoRequest);
-
+        //5
         Aviso aviso = avisoRequest.toAviso(request);
         entityManager.persist(aviso);
         logger.info("[CADASTRO DE AVISO] Aviso cadastrado: {}", aviso.getId());

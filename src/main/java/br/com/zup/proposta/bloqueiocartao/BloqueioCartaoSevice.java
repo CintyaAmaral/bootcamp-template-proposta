@@ -12,12 +12,13 @@ import java.util.Map;
 
 @Service
 public class BloqueioCartaoSevice {
-
+        //1
         private CartaoClient cartaoClient;
         private Logger logger = LoggerFactory.getLogger(BloqueioCartaoSevice.class);
 
         public void executaBloqueioDoCartao(Cartao cartao){
-
+            //2
+            //3
             if (cartao.verificaSeCartaoEstaBoqueado()){
                 logger.info("[BLOQUEIO DE CARTÃO] O cartão já está boqueado no sistema, cartão id: {}", cartao.getId());
                 return;
@@ -27,7 +28,7 @@ public class BloqueioCartaoSevice {
             bloqueioRequest.put("siatemaResponsavel", "Proposta");
             ResponseEntity responseEntity = cartaoClient.bloquearCartao(cartao.getNumeroCartao(), bloqueioRequest);
 
-
+            //4
             if (responseEntity.getStatusCode().is2xxSuccessful()){
                 cartao.bloqueiaCartao();
                 logger.info("[BLQUEIO CARTÃO] Cartão bloqueado: {}", cartao.getId());

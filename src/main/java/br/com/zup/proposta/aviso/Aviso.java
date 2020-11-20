@@ -30,7 +30,7 @@ public class Aviso {
     private String ipCliente;
 
     private String userAgent;
-
+    //1
     @ManyToOne
     private Cartao cartao;
 

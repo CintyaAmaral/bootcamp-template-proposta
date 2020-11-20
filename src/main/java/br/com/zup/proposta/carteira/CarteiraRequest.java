@@ -16,7 +16,8 @@ public class CarteiraRequest {
     public void setEmail(String email) {
         this.email = email;
     }
-
+    //1
+    //2
     public Carteira toCarteira(TipoCarteira carteira){
         return new Carteira(email, carteira);
     }

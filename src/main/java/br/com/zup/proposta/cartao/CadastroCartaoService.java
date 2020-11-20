@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @Component
 public class CadastroCartaoService {
-
+    //1
     private CartaoClient cartaoClient;
     private EntityManager entityManager;
     private Logger logger;
@@ -29,21 +29,22 @@ public class CadastroCartaoService {
     @Transactional(value = Transactional.TxType.REQUIRES_NEW)
     public void verificarSeExisteCartaoNaProposta(){
     logger.info("[SCHEDULED] Verfica se existe cartão cadastrado na proposta");
-
+        //2
         TypedQuery<Proposta> propostas = entityManager.createNamedQuery("findPropostaByStatus", Proposta.class)
                 .setParameter("statusProposta", StatusProposta.ELEGIVEL);
-
+        //3
+        //4
         for(Proposta proposta : propostas.getResultList()){
             if(proposta.verificarSeNaoExisteCartao()){
                 CartaoResponse cartaoResponse = pesquisaCartao(proposta.getId());
                 Assert.notNull(cartaoResponse, "Cartão não pode ser nulo");
-
+                //5
                 Cartao cartao = cartaoResponse.toCartao();
                 cadastraCartaoEAssociaAProposta(proposta, cartao);
             }
         }
     }
-
+    //6
     private CartaoResponse pesquisaCartao(String id){
         return cartaoClient.pesquisarCartaoPorIdProposta(id);
     }

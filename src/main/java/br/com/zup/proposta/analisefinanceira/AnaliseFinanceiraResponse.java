@@ -7,6 +7,7 @@ public class AnaliseFinanceiraResponse {
     private String documento;
     private String nome;
     private String idProposta;
+    //1
     private ResultadoStatusProposta resultadoSolicitacao;
 
     public String getDocumento() {

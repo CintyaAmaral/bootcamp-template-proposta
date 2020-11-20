@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Service
 public class CarteiraService {
-
+    //1
     private CartaoClient cartaoClient;
     private EntityManager entityManager;
     private Logger logger = LoggerFactory.getLogger(CarteiraService.class);
@@ -34,7 +34,9 @@ public class CarteiraService {
 
         logger.info("[ASSOCIA CARTEIRA] Enviando carteira para o sistema de cartões ");
         ResponseEntity responseEntity = cartaoClient.associarCarteira(carteiraRequest, cartao.getNumeroCartao());
-
+        //2
+        //3
+        //4
         if (responseEntity.getStatusCode() == HttpStatus.OK){
             logger.info("[ASSOCIA CARTEIRA] Salva carteira e associa com cartão {}", cartao.getId());
             Carteira carteira = new Carteira(email, tipoCarteira);

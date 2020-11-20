@@ -20,6 +20,7 @@ import java.util.Optional;
 public class CarteiraController {
 
     private EntityManager entityManager;
+    //1
     private CarteiraService carteiraService;
     private Logger logger = LoggerFactory.getLogger(CarteiraController.class);
 
@@ -32,19 +33,23 @@ public class CarteiraController {
     public ResponseEntity associaCartaoComPaypal(@PathVariable String idCartao,
                                                  @RequestBody @Valid CarteiraRequest carteiraRequest,
                                                  UriComponentsBuilder uri){
+        //2
+        //3
         return processarSolicitacao(TipoCarteira.PAYPAL, idCartao, carteiraRequest, uri);
     }
 
     ResponseEntity processarSolicitacao(TipoCarteira tipoCarteira, String idCartao, CarteiraRequest carteiraRequest, UriComponentsBuilder uri){
+       //4
         Optional<Cartao> buscaCartao = Optional.ofNullable(entityManager.find(Cartao.class, idCartao));
-
+        //5
+        //6
         if (buscaCartao.isEmpty()){
             logger.info("[ASSOCIA CARTEIRA] Cartão não encontrado, id {}", idCartao);
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErroPadrao(Arrays.asList("Cartão não encontrado")));
         }
 
         Cartao cartao = buscaCartao.get();
-
+        //7
         if (cartao.verificaSeJaExisteCarteiraAssiciadaComCartao(tipoCarteira)){
             logger.info("[ASSOCIA CARTEIRA] Carteira já cadastrada no cartão, cartao: {}", cartao.getId());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ErroPadrao(Arrays.asList("Cartão já está associado a carteira")));
@@ -58,6 +63,7 @@ public class CarteiraController {
     public ResponseEntity vinculaCartaoComSamsungPay(@PathVariable String idCartao,
                                                      @RequestBody @Valid CarteiraRequest carteiraRequest,
                                                      UriComponentsBuilder uri){
+        //8
             return processarSolicitacao(TipoCarteira.SAMSUNG_PAY, idCartao, carteiraRequest, uri);
     }
 }
