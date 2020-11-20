@@ -51,10 +51,10 @@ public class Proposta {
     public Proposta() {
     }
 
-    public Proposta(@NotBlank @CpfCnpj String documento, @NotBlank @Email String email,
+    public Proposta(@NotBlank DocumentoEncrypt documentoEncrypt, @NotBlank @Email String email,
                     @NotBlank String nome, @NotBlank String endereco,
                     @NotNull @Positive BigDecimal salario) {
-        this.documento = documento;
+        this.documento = documentoEncrypt.hash();
         this.email = email;
         this.nome = nome;
         this.endereco = endereco;

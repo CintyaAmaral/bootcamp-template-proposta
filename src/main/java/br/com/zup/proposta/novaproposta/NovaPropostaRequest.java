@@ -81,7 +81,7 @@ public class NovaPropostaRequest {
     }
 
     public Proposta toModel(){
-        return new Proposta(documento, email, nome, endereco, salario);
+        return new Proposta(new DocumentoEncrypt(documento), email, nome, endereco, salario);
 
     }
 

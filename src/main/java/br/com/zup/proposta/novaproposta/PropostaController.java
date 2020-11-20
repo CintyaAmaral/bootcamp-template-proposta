@@ -35,7 +35,7 @@ public class PropostaController {
     @Transactional
     public ResponseEntity<?> criaProposta(@Valid @RequestBody NovaPropostaRequest novaPropostaRequest, UriComponentsBuilder builder){
 
-        //erro de negócio
+
         if (repository.findByDocumento(novaPropostaRequest.getDocumento()).isPresent()){
             logger.warn("[CRIAÇÃO DA PROPOSTA] Mais de uma tentativa de criação da proposta com o mesmo documento: {}", novaPropostaRequest.getDocumento());
 
